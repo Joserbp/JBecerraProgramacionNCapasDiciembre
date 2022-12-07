@@ -55,5 +55,55 @@ namespace BL
             }
             return result;
         }
+        static public ML.Result Get()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using(SqlConnection context = new SqlConnection(DL.Conexion.Get()))
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = context;
+                    cmd.CommandText = "SELECT [IdAlumno],[Nombre],[ApellidoPaterno],[ApellidoMaterno],[Grado] FROM [Alumno]";
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable alumnoTable = new DataTable();
+
+                    da.Fill(alumnoTable);
+
+                    if(alumnoTable.Rows.Count > 0)
+                    {
+                        result.Objects = new List<object>();
+                        foreach(DataRow row in alumnoTable.Rows)
+                        {
+                            ML.Alumno alumno = new ML.Alumno();
+                            alumno.IdAlumno = int.Parse(row[0].ToString());
+                            alumno.Nombre = row[1].ToString();
+                            alumno.ApellidoPaterno = row[2].ToString();
+                            alumno.ApellidoMaterno = row[3].ToString();
+                            alumno.Grado = byte.Parse(row[4].ToString());
+
+                            result.Objects.Add(alumno);
+                        }
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No contiene registros la tabla Alumno";
+                    }
+
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
     }
 }

@@ -34,5 +34,24 @@ namespace PL
             Console.ReadLine();
             
         }
+        static public void Get()
+        {
+            ML.Result result = BL.Alumno.Get();
+
+            for ----- Determinado numero de repeticiones
+            while --- Condicion de salida //Solo se ejecuta si la condicion es verdadera
+            do while --- //Siempre 1 vez
+            foreach -- //Recorrer la totalidad de un arreglo 
+
+            foreach(ML.Alumno alumno in result.Objects)
+            {
+                Console.WriteLine("El IdAlumno del alumno es: " + alumno.IdAlumno);
+                Console.WriteLine("El Nombre del alumno es: " + alumno.Nombre);
+                Console.WriteLine("El ApellidoPaterno del alumno es: " + alumno.ApellidoPaterno);
+                Console.WriteLine("El ApellidoMaterno del alumno es: " + alumno.ApellidoMaterno);
+                Console.WriteLine("El Grado del alumno es: " + alumno.Grado);
+                Console.WriteLine("---------------------------------------------");
+            }
+        }
     }
 }
