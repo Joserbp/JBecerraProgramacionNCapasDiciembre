@@ -55,7 +55,7 @@ namespace BL
             }
             return result;
         }
-        static public ML.Result Get()
+        static public ML.Result GetAll()
         {
             ML.Result result = new ML.Result();
             try

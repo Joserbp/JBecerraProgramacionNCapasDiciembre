@@ -34,14 +34,14 @@ namespace PL
             Console.ReadLine();
             
         }
-        static public void Get()
+        static public void GetAll()
         {
-            ML.Result result = BL.Alumno.Get();
+            ML.Result result = BL.Alumno.GetAll();
 
-            for ----- Determinado numero de repeticiones
-            while --- Condicion de salida //Solo se ejecuta si la condicion es verdadera
-            do while --- //Siempre 1 vez
-            foreach -- //Recorrer la totalidad de un arreglo 
+            //for ----- Determinado numero de repeticiones
+            //while --- Condicion de salida //Solo se ejecuta si la condicion es verdadera
+            //do while --- //Siempre 1 vez
+            //foreach -- //Recorrer la totalidad de un arreglo 
 
             foreach(ML.Alumno alumno in result.Objects)
             {
