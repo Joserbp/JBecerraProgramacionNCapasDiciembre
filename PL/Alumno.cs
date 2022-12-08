@@ -11,10 +11,10 @@ namespace PL
         static public void Add()
         {
             ML.Alumno alumno = new ML.Alumno();
-            
+
             Console.WriteLine("Ingrese los datos del Alumno");
             Console.WriteLine("Ingrese el Nombre: ");
-            alumno.Nombre =  Console.ReadLine();
+            alumno.Nombre = Console.ReadLine();
             Console.WriteLine("Ingrese el ApellidoPaterno: ");
             alumno.ApellidoPaterno = Console.ReadLine();
             Console.WriteLine("Ingrese el ApellidoMaterno: ");
@@ -22,17 +22,19 @@ namespace PL
             Console.WriteLine("Ingrese el Grupo: ");
             alumno.Grado = byte.Parse(Console.ReadLine());
 
-            ML.Result result = BL.Alumno.Add(alumno);
+            //ML.Result result = BL.Alumno.Add(alumno);
+            ML.Result result = BL.Alumno.AddSP(alumno);
 
             if (result.Correct)
             {
                 Console.WriteLine("Alumno Insertado correctamente");
             }
-            else{
+            else
+            {
                 Console.WriteLine("Ocurrio un error al insertar" + result.ErrorMessage);
             }
             Console.ReadLine();
-            
+
         }
         static public void GetAll()
         {
@@ -43,7 +45,7 @@ namespace PL
             //do while --- //Siempre 1 vez
             //foreach -- //Recorrer la totalidad de un arreglo 
 
-            foreach(ML.Alumno alumno in result.Objects)
+            foreach (ML.Alumno alumno in result.Objects)
             {
                 Console.WriteLine("El IdAlumno del alumno es: " + alumno.IdAlumno);
                 Console.WriteLine("El Nombre del alumno es: " + alumno.Nombre);
@@ -52,6 +54,31 @@ namespace PL
                 Console.WriteLine("El Grado del alumno es: " + alumno.Grado);
                 Console.WriteLine("---------------------------------------------");
             }
+        }
+        static public void GetById()
+        {
+
+            Console.WriteLine("Ingrese el Id del Alumno: ");
+            int IdAlumno = int.Parse(Console.ReadLine());
+        
+            ML.Result result = BL.Alumno.GetById(IdAlumno);
+
+            if (result.Correct)
+            {
+                ML.Alumno alumno = (ML.Alumno) result.Object; //Unboxing 
+                Console.WriteLine("El IdAlumno del alumno es: " + alumno.IdAlumno);
+                Console.WriteLine("El Nombre del alumno es: " + alumno.Nombre);
+                Console.WriteLine("El ApellidoPaterno del alumno es: " + alumno.ApellidoPaterno);
+                Console.WriteLine("El ApellidoMaterno del alumno es: " + alumno.ApellidoMaterno);
+                Console.WriteLine("El Grado del alumno es: " + alumno.Grado);
+                Console.WriteLine("---------------------------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Ocurrio un error" + result.ErrorMessage);
+            }
+
+
         }
     }
 }
